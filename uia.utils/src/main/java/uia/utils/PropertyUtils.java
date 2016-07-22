@@ -33,8 +33,9 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
+ * Object properties utility.
  * 
- * @author Kyle
+ * @author Kyle K. Lin
  */
 public class PropertyUtils {
 
@@ -68,7 +69,7 @@ public class PropertyUtils {
 	}
 
 	/**
-	 * Retrive value to specific property of block converter.
+	 * Retrieve value to specific property of block converter.
 	 * 
 	 * @param obj The block converter.
 	 * @param propName The property name.

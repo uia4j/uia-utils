@@ -30,19 +30,40 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 
 /**
+ * String utility.
  * 
- * @author Kyle
+ * @author Kyle K. Lin
  */
 public class StringUtils {
 
+	/**
+	 * Convert 'Y' or "TRUE" to boolean.
+	 * @param yn 'Y' or "TRUE"
+	 * @return True if yn is 'Y' or "TRUE", others false.
+	 */
     public static boolean bool(String yn) {
         return "Y".equalsIgnoreCase(yn) || "TRUE".equalsIgnoreCase(yn);
     }
 
+    /**
+     * Convert string to byte array.
+     * @param value Content with UTF8 charset.
+     * @param length Length of byte array.
+     * @param empty Empty byte.
+     * @return Result.
+     */
     public static byte[] toBytes(String value, int length, byte empty) {
         return toBytes(value, length, empty, Charset.forName("UTF8"));
     }
 
+    /**
+     * Convert string to byte array.
+     * @param value Content.
+     * @param length Length of byte array.
+     * @param empty Empty byte.
+     * @param charset Content charset.
+     * @return Result.
+     */
     public static byte[] toBytes(String value, int length, byte empty, Charset charset) {
         byte[] temp = value.getBytes(charset);
         if (temp.length == length) {

@@ -27,15 +27,26 @@
 package uia.utils;
 
 /**
- *
- * @author Kyle
+ * Boolean utility.
+ * 
+ * @author Kyle K. Lin
  */
 public class BooleanUtils {
 
+	/**
+	 * Convert boolean to Y/N character.
+	 * @param value Value.
+	 * @return Y or N.
+	 */
     public static String toYN(boolean value) {
         return value ? "Y" : "N";
     }
 
+	/**
+	 * Convert boolean to TRUE/FALSE word.
+	 * @param value Value.
+	 * @return TRUE or FALSE.
+	 */
     public static String toTF(boolean value) {
         return value ? "TRUE" : "FALSE";
     }

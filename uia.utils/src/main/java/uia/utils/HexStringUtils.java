@@ -27,12 +27,17 @@
 package uia.utils;
 
 /**
+ * Hex string utility.
  * 
- * @author Kyle
+ * @author Kyle K. Lin
  */
 public class HexStringUtils {
 
-
+	/**
+	 * Convert hex string to byte array.
+	 * @param hex Hex string. e.g. 38ff0e2a86
+	 * @return Byte array.
+	 */
     public static byte[] toBytes(String hex) {
         String data = hex.length() % 2 == 1 ? "0" + hex : hex;
         byte[] result = new byte[data.length() / 2];
@@ -42,10 +47,15 @@ public class HexStringUtils {
         return result;
     }
     
-
-    public static byte[] toBytes(String hex, boolean headFix) {
+    /**
+	 * Convert hex string to byte array.
+	 * @param hex Hex string. e.g. ab12cd34
+     * @param fixAtHead Add '0' at head if this is true or add '0' to tail when length of hex string is odd.
+     * @return Byte array.
+     */
+    public static byte[] toBytes(String hex, boolean fixAtHead) {
         String data = hex.length() % 2 == 1 ? 
-                headFix ? "0" + hex : hex + "0" :  
+        		fixAtHead ? "0" + hex : hex + "0" :  
                 hex;
         byte[] result = new byte[data.length() / 2];
         for (int i = 0; i <result.length; i++) {
@@ -54,6 +64,12 @@ public class HexStringUtils {
         return result;
     }
     
+    /**
+     * Convert hex string to byte array.
+	 * @param hex Hex string. e.g. ab-12-cd-34
+     * @param split Split string.
+     * @return Byte array.
+     */
 	public static byte[] toBytes(String hex, String split) {
 		String[] value = hex.split(split);
 		byte[] result = new byte[value.length];

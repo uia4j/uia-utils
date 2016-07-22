@@ -25,6 +25,6 @@
  * * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *******************************************************************************/
 /**
- * uia.utils is helper API for uia.message.
+ * common utilities for uia.
  */
 package uia.utils;

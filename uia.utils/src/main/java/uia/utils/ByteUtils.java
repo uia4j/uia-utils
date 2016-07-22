@@ -30,8 +30,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Byte utility.
  * 
- * @author Kyle
+ * @author Kyle K. Lin
  */
 public class ByteUtils {
 
@@ -73,21 +74,21 @@ public class ByteUtils {
 
     /**
      * Convert bytes to short.
-     * @param value Data
+     * @param value Value.
      * @return Result.
      */
-    public static short shortValue(byte[] data) {
-        int len = (0x00ff & data[0]);
-        if (data.length > 1) {
+    public static short shortValue(byte[] value) {
+        int len = (0x00ff & value[0]);
+        if (value.length > 1) {
             len = len << 8;
-            len += (0x00ff & data[1]);
+            len += (0x00ff & value[1]);
         }
         return (short) len;
     }
 
     /**
      * Convert bytes to unsigned integer.
-     * @param value Data
+     * @param value Value.
      * @param bitLength Bit length.
      * @return Result
      */
@@ -203,23 +204,29 @@ public class ByteUtils {
     }
 
     /**
-     * ex. data=[0x73] (01110011), offset=3 >> 00001110 01100000
+     * Offset bytes<br>
+     * Example:<br>
+     * data: {0x73} (01110011), offset: 3<br>
+     * result: 00001110 01100000<br>
      * 
-     * @param data
-     * @param bitOffset
-     * @return
+     * @param data Value.
+     * @param bitOffset Offset bits.
+     * @return Result.
      */
     public static byte[] offsetBits(byte[] data, int bitOffset) {
         return offsetBits(data, bitOffset, 8 * data.length);
     }
 
     /**
-     * ex. data=[0x73] (01110011), offset=3, length=7 >> 00001110 01000000
+     * Offset bytes<br>
+     * Example:<br>
+     * data: {0x73} (01110011), offset: 3, length: 7<br>
+     * result: 00001110 01000000<br>
      * 
-     * @param data
-     * @param bitOffset
-     * @param bitLength
-     * @return
+     * @param data Value.
+     * @param bitOffset Offset bits.
+     * @param bitLength bit count of result.
+     * @return Result.
      */
     public static byte[] offsetBits(byte[] data, int bitOffset, int bitLength) {
         int byteCount = (int) Math.ceil((double) (bitOffset + bitLength) / 8);
@@ -249,22 +256,30 @@ public class ByteUtils {
     }
 
     /**
-     * 
-     * @param data
-     * @param from
-     * @param length
-     * @return
+     * Convert to string with UTF8 charset.
+     * @param data Value.
+     * @param from From index.
+     * @param length Byte count.
+     * @return Result.
      */
     public static String toString(byte[] data, int from, int length) {
         return new String(Arrays.copyOfRange(data, from, from + length));
     }
 
+    /**
+     * Convert to hex string.
+     * @param data Value.
+     * @return Result.
+     */
     public static String toHexString(byte data) {
         return String.format("%02x", data & 0xff);
     }
 
     /**
-     * ex. data=[0xf3,0x82] >> "f3-82"
+     * Convert to hex string.<br>
+     * Example:<br>
+     * data: {0xf3, 0x82, 0x12}<br>
+	 * result: f3-82-12
      * 
      * @param data byte array.
      * @return hex string.
@@ -274,7 +289,10 @@ public class ByteUtils {
     }
 
     /**
-     * ex. data=[0xf3,0x82] >> "f3-82"
+     * Convert to hex string.<br>
+     * Example:<br>
+     * data: {0xf3, 0x82, 0x12}, max: 2<br>
+	 * result: f3-82<br>
      * 
      * @param data byte array.
      * @param max Max bytes converted to string.
@@ -285,11 +303,14 @@ public class ByteUtils {
     }
 
     /**
-     * ex. data=[0xf3,0x82], split=";" >> "f3;82"
+     * Convert to hex string.<br>
+     * Example:<br>
+     * data: {0xf3, 0x82, 0x12}, split: ","<br>
+	 * result: f3,82,12<br>
      * 
      * @param data byte array.
      * @param split split string.
-     * @return
+     * @return Result.
      */
     public static String toHexString(byte[] data, String split) {
         if (data == null || data.length == 0) {
@@ -305,7 +326,10 @@ public class ByteUtils {
     }
 
     /**
-     * ex. data=[0xf3,0x82], split=";" >> "f3;82"
+     * Convert to hex string.<br>
+     * Example:<br>
+     * data: {0xf3, 0x82, 0x12}, split: ",", max: 2<br>
+	 * result: f3,82<br>
      * 
      * @param data byte array.
      * @param split split string.
@@ -329,10 +353,13 @@ public class ByteUtils {
     }
 
     /**
-     * ex. data=0x83 >> "10000011"
+     * Convert byte to bit string.<br>
+     * Example:<br>
+     * data: 0x83<br>
+     * result: "10000011"<br>
      * 
      * @param data one byte.
-     * @return
+     * @return Result.
      */
     public static String toBitString(byte data) {
         StringBuilder result = new StringBuilder();
@@ -347,10 +374,13 @@ public class ByteUtils {
     }
 
     /**
-     * ex. data=[0x82,0xf0] >> "1000001011110000"
+     * Convert byte array to bit string.<br>
+     * Example:<br>
+     * data: {0x82, 0xf0}<br>
+     * result: "1000001011110000"<br>
      * 
      * @param data byte array.
-     * @return
+     * @return Result.
      */
     public static String toBitString(byte[] data) {
         StringBuilder result = new StringBuilder();
@@ -361,27 +391,38 @@ public class ByteUtils {
     }
 
     /**
-     * ex. data=0xf0, pos=3 >> 0x10
+     * Get value.<br>
+     * Example:<br>
+     * data: 0xf0, pos: 3<br>
+     * result: 0x10<br>
      * 
-     * @param data
-     * @param pos
-     * @return
+     * @param data Value
+     * @param pos bit index.
+     * @return Result.
      */
     public static byte valueRight(byte data, int pos) {
         return (byte) (data & (0xff >>> pos));
     }
 
     /**
-     * ex. data=0xf0, pos=3 >> 0xe0
+     * Get value.<br>
+     * Example:<br>
+     * data: 0xf0, pos: 3<br>
+     * result: 0xe0<br>
      * 
-     * @param data
-     * @param pos
-     * @return
+     * @param data Value
+     * @param pos bit index.
+     * @return Result.
      */
     public static byte valueLeft(byte data, int pos) {
         return (byte) (data & ~(0xff >>> pos));
     }
 
+    /**
+     * Convert byte list to array.
+     * @param data Value
+     * @return Result.
+     */
     public static byte[] toArray(List<Byte> data) {
         byte[] result = new byte[data.size()];
         for (int i = 0; i < result.length; i++) {
@@ -390,26 +431,58 @@ public class ByteUtils {
         return result;
     }
 
+    /**
+     * Add bytes.
+     * @param result Value.
+     * @param data Bytes to be added.
+     */
     public static void add(List<Byte> result, byte[] data) {
         for (int i = 0; i < data.length; i++) {
             result.add(data[i]);
         }
     }
 
+    /**
+     * Add bytes.
+     * @param result Value.
+     * @param b Byte to be added.
+     * @param count Count.
+     */
     public static void add(List<Byte> result, byte b, int count) {
         for (int i = 0; i < count; i++) {
             result.add(b);
         }
     }
 
+    /**
+     * Copy bytes.
+     * @param data Value
+     * @param from From index.
+     * @return Result.
+     */
     public static byte[] copy(byte[] data, int from) {
         return copy(data, from, data.length - from, (byte) 0x00);
     }
 
+    /**
+     * Copy bytes.
+     * @param data Value
+     * @param from From index.
+     * @param length Byte count.
+     * @return Result.
+     */
     public static byte[] copy(byte[] data, int from, int length) {
         return copy(data, from, length, (byte) 0x00);
     }
 
+    /**
+     * Copy bytes.
+     * @param data Value
+     * @param from From index.
+     * @param length Byte count.
+     * @param empty Empty byte.
+     * @return Result.
+     */
     public static byte[] copy(byte[] data, int from, int length, byte empty) {
         byte[] result = new byte[length];
         Arrays.fill(result, empty);
@@ -420,6 +493,12 @@ public class ByteUtils {
         return result;
     }
 
+    /**
+     * Compare two byte array.
+     * @param source Source.
+     * @param target Target.
+     * @return Result.
+     */
     public static boolean compare(byte[] source, byte[] target) {
         if (source == null || target == null || source.length != target.length) {
             return false;

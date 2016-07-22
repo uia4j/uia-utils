@@ -5,22 +5,41 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TreeMap;
 
+/**
+ * Element arithmetic.
+ * 
+ * @author Kyle K. Lin
+ *
+ */
 public class ElemArithmetic {
 
 	public final String func;
 	
 	private final ArrayList<String> postFix;
 	
+	/**
+	 * Constructor.
+	 * @param func Function.
+	 */
 	public ElemArithmetic(String func) {
 		this.func = func.replace(" ", "");
 		this.postFix = new ArrayList<String>();
 		prepare();
 	}
 	
+	/**
+	 * Calculate.
+	 * @return Result.
+	 */
 	public double calculate() {
 		return calculate(null);
 	}
 	
+	/**
+	 * Calculate.
+	 * @param paramValues values of parameters.
+	 * @return Result.
+	 */
 	public double calculate(Map<String, Object> paramValues) {
 		if(paramValues == null) {
 			paramValues = new TreeMap<String, Object>();
@@ -67,6 +86,9 @@ public class ElemArithmetic {
 		return value.pop();
 	}
 	
+	/**
+	 * Print function.
+	 */
 	public void println() {
 		System.out.print(this.func + " >>> ");
 		for(String e : this.postFix) {

@@ -29,11 +29,23 @@ package uia.utils;
 import java.util.ArrayList;
 
 /**
+ * Integer utility.
  * 
- * @author Kyle
+ * @author Kyle K. Lin
  */
 public class IntegerUtils {
 
+	/**
+	 * Convert integer to string.<br>
+	 * Example:<br>
+	 * value: 12, length: 10, empty: 0x20<br>
+	 * result "12        ", 8 blank characters appended to "12".<br>
+	 * 
+	 * @param value Value.
+	 * @param length Length of result.
+	 * @param empty Appended character.
+	 * @return Result.
+	 */
     public static String toString(int value, int length, byte empty) {
         String result = Integer.toString(value);
         String fix = new String(new byte[] { empty });
@@ -47,6 +59,14 @@ public class IntegerUtils {
         return result;
     }
 
+    /**
+     * Convert integer to BCD byte array.<br>
+	 * Example:<br>
+	 * value:1600, result: {0x16, 0x00}.<br>
+     * 
+     * @param value Value.
+     * @return Result.
+     */
     public static byte[] bcdValue(int value) {
         ArrayList<Byte> data = new ArrayList<Byte>();
         do {
@@ -65,6 +85,13 @@ public class IntegerUtils {
         return result;
     }
 
+    /**
+     * Convert integer to 4 bytes array.<br>
+     * Example:<br>
+     * value:258, result: {0x00, 0x00, 0x01, 0x02}.<br>
+     * @param value Value.
+     * @return Result
+     */
     public static byte[] byteValue(int value) {
         byte[] result = new byte[4];
         result[0] = (byte) (value >> 24);

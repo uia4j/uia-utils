@@ -26,12 +26,23 @@
  *******************************************************************************/
 package uia.utils;
 
+/**
+ * Short utility.
+ * 
+ * @author Kyle K. Lin
+ *
+ */
 public class ShortUtils {
 
-    public static byte[] toBytes(short data) {
-        byte[] value = new byte[2];
-        value[0] = (byte) (data >> 8);
-        value[1] = (byte) data;
-        return value;
+	/**
+	 * Convert short to 2 bytes value.
+	 * @param value Value.
+	 * @return Result.
+	 */
+    public static byte[] toBytes(short value) {
+        byte[] result = new byte[2];
+        result[0] = (byte) (value >> 8);
+        result[1] = (byte) value;
+        return result;
     }
 }

@@ -19,6 +19,5 @@ public class CRCTest {
                 0x39
         };
         System.out.println(ByteUtils.toHexString(CRC.crc16(data)));
-        System.out.println(ByteUtils.toHexString(CRC.crc16_sun(data)));
     }
 }
