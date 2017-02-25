@@ -1,6 +1,7 @@
 UIA utils
-[![Build Status](https://travis-ci.org/gazer2kanlin/uia.utils4j.svg?branch=master)](https://travis-ci.org/gazer2kanlin/uia.utils4j)
 ================
+
+[![Build Status](https://travis-ci.org/gazer2kanlin/uia.utils4j.svg?branch=master)](https://travis-ci.org/gazer2kanlin/uia.utils4j)
 
 Common utilities.
 
