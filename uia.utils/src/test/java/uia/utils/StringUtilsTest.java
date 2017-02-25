@@ -28,6 +28,7 @@ package uia.utils;
 
 import java.nio.charset.Charset;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -41,17 +42,32 @@ public class StringUtilsTest {
 
     @Test
     public void testBool() throws Exception {
-        System.out.println(StringUtils.bool("Y"));
-        System.out.println(StringUtils.bool("True"));
-        System.out.println(StringUtils.bool("n"));
-        System.out.println(StringUtils.bool("False"));
+    	Assert.assertEquals(true, StringUtils.bool("Y"));
+    	Assert.assertEquals(true, StringUtils.bool("True"));
+    	Assert.assertEquals(false, StringUtils.bool("n"));
+    	Assert.assertEquals(false, StringUtils.bool("False"));
     }
 
     @Test
     public void testToBytes() {
-        System.out.println(ByteUtils.toHexString(StringUtils.toBytes("abc", 4, (byte) 0x00)));
-        System.out.println(ByteUtils.toHexString(StringUtils.toBytes("台灣", 10, (byte) 0x20)));
-        System.out.println(ByteUtils.toHexString(StringUtils.toBytes("台灣", 4, (byte) 0x20)));
-        System.out.println(ByteUtils.toHexString(StringUtils.toBytes("台灣", 10, (byte) 0x20, Charset.forName("Big5"))));
+    	Assert.assertArrayEquals(
+    			new byte[] { 0x61, 0x62, 0x63, 0x00 }, 
+    			StringUtils.toBytes("abc", 4, (byte) 0x00)
+    	);
+    	
+    	Assert.assertArrayEquals(
+    			new byte[] { (byte)0xe5, (byte)0x8f, (byte)0xb0, (byte)0xe7, (byte)0x81, (byte)0xa3, 0x20, 0x20, 0x20, 0x20 }, 
+    			StringUtils.toBytes("台灣", 10, (byte) 0x20)
+    	);
+    	
+    	Assert.assertArrayEquals(
+    			new byte[] { (byte)0xe5, (byte)0x8f, (byte)0xb0, (byte)0xe7 }, 
+    			StringUtils.toBytes("台灣", 4, (byte) 0x20)
+    	);
+        
+    	Assert.assertArrayEquals(
+    			new byte[] { (byte)0xa5, (byte)0x78, (byte)0xc6, 0x57, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20 }, 
+        		StringUtils.toBytes("台灣", 10, (byte) 0x20, Charset.forName("Big5"))
+    	);
     }
 }

@@ -51,31 +51,31 @@ public class ElemArithmetic {
 				Double v1 = value.pop();
 				Double v2 = value.pop();
 				value.push(v2 + v1);
-				System.out.println(String.format("%s + %s", v2, v1));
+				//System.out.println(String.format("%s + %s", v2, v1));
 			}
 			else if("-".equals(elem)) {
 				Double v1 = value.pop();
 				Double v2 = value.pop();
 				value.push(v2 - v1);
-				System.out.println(String.format("%s - %s", v2, v1));
+				//System.out.println(String.format("%s - %s", v2, v1));
 			}
 			else if("*".equals(elem)) {
 				Double v1 = value.pop();
 				Double v2 = value.pop();
 				value.push(v2 * v1);
-				System.out.println(String.format("%s * %s", v2, v1));
+				//System.out.println(String.format("%s * %s", v2, v1));
 			}
 			else if("/".equals(elem)) {
 				Double v1 = value.pop();
 				Double v2 = value.pop();
 				value.push(v2 / v1);
-				System.out.println(String.format("%s / %s", v2, v1));
+				//System.out.println(String.format("%s / %s", v2, v1));
 			}
 			else if("^".equals(elem)) {
 				Double v1 = value.pop();
 				Double v2 = value.pop();
 				value.push(Math.pow(v2, v1));
-				System.out.println(String.format("%s ^ %s", v2, v1));
+				//System.out.println(String.format("%s ^ %s", v2, v1));
 			}
 			else {
 				Object result = paramValues.get(elem);

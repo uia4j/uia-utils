@@ -1,7 +1,7 @@
 package uia.utils;
 
+import org.junit.Assert;
 import org.junit.Test;
-
 
 public class CRCTest {
 
@@ -18,6 +18,6 @@ public class CRCTest {
                 0x38,
                 0x39
         };
-        System.out.println(ByteUtils.toHexString(CRC.crc16(data)));
+        Assert.assertArrayEquals(new byte[] { (byte)0xbb, (byte)0x3d }, CRC.crc16(data));
     }
 }

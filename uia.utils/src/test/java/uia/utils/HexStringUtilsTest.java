@@ -26,6 +26,7 @@
  *******************************************************************************/
 package uia.utils;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -38,10 +39,25 @@ public class HexStringUtilsTest {
     }
 
     @Test
-    public void test() throws Exception {
-        System.out.println(ByteUtils.toHexString(HexStringUtils.toBytes("23456789abcdef")));
-        System.out.println(ByteUtils.toHexString(HexStringUtils.toBytes("23456789abcdefA")));
-        System.out.println(ByteUtils.toHexString(HexStringUtils.toBytes("23456789abcdefe", true)));
-        System.out.println(ByteUtils.toHexString(HexStringUtils.toBytes("23456789abcdefe", false)));
+    public void testToBytes() throws Exception {
+    	Assert.assertArrayEquals(
+    			new byte[] { 0x23, 0x45, 0x67, (byte)0x89, (byte)0xab, (byte)0xcd, (byte)0xef }, 
+    			HexStringUtils.toBytes("23-45-67-89-ab-cd-ef", "-"));
+
+    	Assert.assertArrayEquals(
+    			new byte[] { 0x23, 0x45, 0x67, (byte)0x89, (byte)0xab, (byte)0xcd, (byte)0xef }, 
+    			HexStringUtils.toBytes("23456789abcdef"));
+
+    	Assert.assertArrayEquals(
+    			new byte[] { 0x02, 0x34, 0x56, 0x78, (byte)0x9a, (byte)0xbc, (byte)0xde, (byte)0xfa }, 
+    			HexStringUtils.toBytes("23456789abcdefA"));
+
+    	Assert.assertArrayEquals(
+    			new byte[] { 0x02, 0x34, 0x56, 0x78, (byte)0x9a, (byte)0xbc, (byte)0xde, (byte)0xfa }, 
+    			HexStringUtils.toBytes("23456789abcdefA", true));
+
+    	Assert.assertArrayEquals(
+    			new byte[] { 0x23, 0x45, 0x67, (byte)0x89, (byte)0xab, (byte)0xcd, (byte)0xef, (byte)0xa0 }, 
+    			HexStringUtils.toBytes("23456789abcdefA", false));
     }
 }

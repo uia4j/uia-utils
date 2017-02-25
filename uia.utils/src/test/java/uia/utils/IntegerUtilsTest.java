@@ -26,6 +26,7 @@
  *******************************************************************************/
 package uia.utils;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -36,13 +37,24 @@ public class IntegerUtilsTest {
 
     @Test
     public void testToString() {
-        System.out.println(IntegerUtils.toString(23, 4, (byte) '0'));
-        System.out.println(IntegerUtils.toString(12345678, 4, (byte) '0'));
-        System.out.println(IntegerUtils.toString(-23, 4, (byte) ' '));
+    	Assert.assertEquals("0023", IntegerUtils.toString(23, 4, (byte) '0'));
+    	Assert.assertEquals("1234", IntegerUtils.toString(12345678, 4, (byte) '0'));
+    	Assert.assertEquals(" -23", IntegerUtils.toString(-23, 4, (byte) ' '));
     }
 
     @Test
     public void testBcdValue() {
-        System.out.println(ByteUtils.toHexString(IntegerUtils.bcdValue(91234)));
+    	Assert.assertArrayEquals(new byte[] { 0x09, 0x12, 0x34 }, IntegerUtils.bcdValue(91234));
+    }
+
+    @Test
+    public void testByteValue() {
+    	Assert.assertArrayEquals(
+    			new byte[] { 0x00, 0x00, 0x00, (byte)0xff }, 
+    			IntegerUtils.byteValue(255));
+
+    	Assert.assertArrayEquals(
+    			new byte[] { (byte)0xff, (byte)0xff, (byte)0xff, (byte)0xfe }, 
+    			IntegerUtils.byteValue(-2));
     }
 }

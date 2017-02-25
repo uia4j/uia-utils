@@ -26,6 +26,7 @@
  *******************************************************************************/
 package uia.utils;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -36,7 +37,12 @@ public class ShortUtilsTest {
 
     @Test
     public void testToBytes() {
-        System.out.println(ByteUtils.shortValue(new byte[] { (byte) 0x9e, (byte) 0x8f }));
-        System.out.println(ByteUtils.toHexString(ShortUtils.toBytes((short) -24945)));
+    	Assert.assertArrayEquals(
+    			new byte[] {0x00, 0x01 }, 
+    			ShortUtils.toBytes((short) 1));
+    	
+    	Assert.assertArrayEquals(
+    			new byte[] { (byte)0x9e, (byte)0x8f }, 
+    			ShortUtils.toBytes((short) -24945));
     }
 }

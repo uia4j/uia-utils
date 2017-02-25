@@ -26,6 +26,7 @@
  *******************************************************************************/
 package uia.utils;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -38,10 +39,10 @@ public class BooleanUtilsTest {
     }
 
     @Test
-    public void test() throws Exception {
-        System.out.println(BooleanUtils.toTF(true));
-        System.out.println(BooleanUtils.toTF(false));
-        System.out.println(BooleanUtils.toYN(true));
-        System.out.println(BooleanUtils.toYN(false));
+    public void testToString() throws Exception {
+    	Assert.assertEquals("TRUE", BooleanUtils.toTF(true));
+    	Assert.assertEquals("FALSE", BooleanUtils.toTF(false));
+    	Assert.assertEquals("Y", BooleanUtils.toYN(true));
+    	Assert.assertEquals("N", BooleanUtils.toYN(false));
     }
 }
