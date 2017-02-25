@@ -1,10 +1,10 @@
 ---
-
 language: java
 
-jdk:
-  - oraclejdk6
-
 script:
-  - java make clean junit-test
-  
+  - mvn test -f ./uia.utils/pom.xml
+
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk6
