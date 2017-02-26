@@ -1,29 +1,31 @@
 /*******************************************************************************
- *  Copyright 2017 UIA
+ * Copyright 2017 UIA
  *
- *  Licensed to the Apache Software Foundation (ASF) under one or more
- *  contributor license agreements.  See the NOTICE file distributed with
- *  this work for additional information regarding copyright ownership.
- *  The ASF licenses this file to You under the Apache License, Version 2.0
- *  (the "License"); you may not use this file except in compliance with
- *  the License.  You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *******************************************************************************/
 package uia.utils;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Byte utility.
- * 
+ *
  * @author Kyle K. Lin
  */
 public class ByteUtils {
@@ -177,7 +179,8 @@ public class ByteUtils {
 
             if (bitStart == 0) {
                 result[i] = data[byteStart + i];
-            } else {
+            }
+            else {
                 result[i] = (byte) (ByteUtils.valueRight(data[byteStart + i], bitStart) << bitStart);
                 if (byteStart + i + 1 < data.length) {
                     int right = ByteUtils.valueLeft(data[byteStart + i + 1], bitStart);
@@ -200,7 +203,7 @@ public class ByteUtils {
      * Example:<br>
      * data: {0x73} (01110011), offset: 3<br>
      * result: 00001110 01100000<br>
-     * 
+     *
      * @param data Value.
      * @param bitOffset Offset bits.
      * @return Result.
@@ -214,7 +217,7 @@ public class ByteUtils {
      * Example:<br>
      * data: {0x73} (01110011), offset: 3, length: 7<br>
      * result: 00001110 01000000<br>
-     * 
+     *
      * @param data Value.
      * @param bitOffset Offset bits.
      * @param bitLength bit count of result.
@@ -231,7 +234,8 @@ public class ByteUtils {
 
             if (bitOffset == 0) {
                 bytes[i] = data[i];
-            } else {
+            }
+            else {
                 bytes[i] |= (byte) ((0x00ff & data[i]) >>> bitOffset);
                 if (i + 1 < byteCount) {
                     bytes[i + 1] = (byte) (data[i] << (8 - bitOffset));
@@ -259,6 +263,19 @@ public class ByteUtils {
     }
 
     /**
+     * Convert to string with UTF8 charset.
+     * @param data Value.
+     * @param from From index.
+     * @param length Byte count.
+     * @param charset Charset
+     * @return Result.
+     * @throws UnsupportedEncodingException
+     */
+    public static String toString(byte[] data, int from, int length, Charset charset) {
+        return new String(Arrays.copyOfRange(data, from, from + length), charset);
+    }
+
+    /**
      * Convert to hex string.
      * @param data Value.
      * @return Result.
@@ -271,8 +288,8 @@ public class ByteUtils {
      * Convert to hex string.<br>
      * Example:<br>
      * data: {0xf3, 0x82, 0x12}<br>
-	 * result: f3-82-12
-     * 
+     * result: f3-82-12
+     *
      * @param data byte array.
      * @return hex string.
      */
@@ -284,8 +301,8 @@ public class ByteUtils {
      * Convert to hex string.<br>
      * Example:<br>
      * data: {0xf3, 0x82, 0x12}, max: 2<br>
-	 * result: f3-82<br>
-     * 
+     * result: f3-82<br>
+     *
      * @param data byte array.
      * @param max Max bytes converted to string.
      * @return hex string.
@@ -298,8 +315,8 @@ public class ByteUtils {
      * Convert to hex string.<br>
      * Example:<br>
      * data: {0xf3, 0x82, 0x12}, split: ","<br>
-	 * result: f3,82,12<br>
-     * 
+     * result: f3,82,12<br>
+     *
      * @param data byte array.
      * @param split split string.
      * @return Result.
@@ -321,8 +338,8 @@ public class ByteUtils {
      * Convert to hex string.<br>
      * Example:<br>
      * data: {0xf3, 0x82, 0x12}, split: ",", max: 2<br>
-	 * result: f3,82<br>
-     * 
+     * result: f3,82<br>
+     *
      * @param data byte array.
      * @param split split string.
      * @param max Max bytes converted to string.
@@ -338,7 +355,7 @@ public class ByteUtils {
         for (int i = 1; i < Math.min(max, data.length); i++) {
             result.append(split).append(toHexString(data[i]));
         }
-        if(data.length > max) {
+        if (data.length > max) {
             result.append(" ... total:" + data.length);
         }
         return result.toString();
@@ -349,7 +366,7 @@ public class ByteUtils {
      * Example:<br>
      * data: 0x83<br>
      * result: "10000011"<br>
-     * 
+     *
      * @param data one byte.
      * @return Result.
      */
@@ -358,7 +375,8 @@ public class ByteUtils {
         for (int i = 0; i < 8; i++) {
             if ((data & (0x80 >>> i)) == 0) {
                 result.append("0");
-            } else {
+            }
+            else {
                 result.append("1");
             }
         }
@@ -370,7 +388,7 @@ public class ByteUtils {
      * Example:<br>
      * data: {0x82, 0xf0}<br>
      * result: "1000001011110000"<br>
-     * 
+     *
      * @param data byte array.
      * @return Result.
      */
@@ -387,7 +405,7 @@ public class ByteUtils {
      * Example:<br>
      * data: 0xf0, pos: 3<br>
      * result: 0x10<br>
-     * 
+     *
      * @param data Value
      * @param pos bit index.
      * @return Result.
@@ -401,7 +419,7 @@ public class ByteUtils {
      * Example:<br>
      * data: 0xf0, pos: 3<br>
      * result: 0xe0<br>
-     * 
+     *
      * @param data Value
      * @param pos bit index.
      * @return Result.
@@ -420,6 +438,33 @@ public class ByteUtils {
         for (int i = 0; i < result.length; i++) {
             result[i] = data.get(i);
         }
+        return result;
+    }
+
+    /**
+     * Add bytes.
+     * @param data Original.
+     * @param append Append data
+     * @param result Value.
+     */
+    public static byte[] add(byte[] data, byte[] append) {
+        byte[] result = new byte[data.length + append.length];
+        System.arraycopy(data, 0, result, 0, data.length);
+        System.arraycopy(append, 0, result, data.length, append.length);
+        return result;
+    }
+
+    /**
+     * Add bytes.
+     * @param data Original.
+     * @param b Byte to be added.
+     * @param count Count.
+     * @param result Value.
+     */
+    public static byte[] add(byte[] data, byte append, int count) {
+        byte[] result = new byte[data.length + count];
+        Arrays.fill(result, append);
+        System.arraycopy(data, 0, result, 0, data.length);
         return result;
     }
 
