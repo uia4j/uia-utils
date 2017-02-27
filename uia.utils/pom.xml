@@ -46,4 +46,10 @@
 		<developerConnection>Kyle K. Lin</developerConnection>
 		<url>https://github.com/gazer2kanlin/uia.utils4j</url>
 	</scm>
+	<distributionManagement>
+	    <repository>
+	        <id>bintray-my-maven</id>
+	        <url>https://api.bintray.com/maven/gazer2kanlin/maven/uia.utils4j/;publish=1</url>
+	    </repository>
+	</distributionManagement>
 </project>
