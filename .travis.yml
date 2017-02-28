@@ -1,9 +1,15 @@
 ---
 language: java
 
+sudo: false
+
 script:
   - mvn test -f ./uia.utils/pom.xml
+  - mvn cobertura:cobertura
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  
 jdk:
   - oraclejdk8
   - oraclejdk7

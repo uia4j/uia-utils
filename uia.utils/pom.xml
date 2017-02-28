@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uia</groupId>
 	<artifactId>uia.utils</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>uia.utils</name>
 	<url>https://github.com/gazer2kanlin/uia.utils4j</url>
@@ -29,6 +29,18 @@
 				<version>2.4</version>
 			</plugin>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<formats>
+						<format>html</format>
+						<format>xml</format>
+					</formats>
+					<check />
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<executions>
@@ -47,9 +59,9 @@
 		<url>https://github.com/gazer2kanlin/uia.utils4j</url>
 	</scm>
 	<distributionManagement>
-	    <repository>
-	        <id>bintray-my-maven</id>
-	        <url>https://api.bintray.com/maven/gazer2kanlin/maven/uia.utils4j/;publish=1</url>
-	    </repository>
+		<repository>
+			<id>bintray-my-maven</id>
+			<url>https://api.bintray.com/maven/gazer2kanlin/maven/uia.utils4j/;publish=1</url>
+		</repository>
 	</distributionManagement>
 </project>
