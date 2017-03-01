@@ -5,7 +5,7 @@ sudo: false
 
 script:
   - mvn test -f ./uia.utils/pom.xml
-  - mvn cobertura:cobertura
+  - mvn cobertura:cobertura -f ./uia.utils/pom.xml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
