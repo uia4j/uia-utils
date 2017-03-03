@@ -2,6 +2,9 @@ UIA utils
 ================
 
 [![Build Status](https://travis-ci.org/gazer2kanlin/uia.utils4j.svg?branch=master)](https://travis-ci.org/gazer2kanlin/uia.utils4j)
+[![Codecov](https://img.shields.io/codecov/c/github/gazer2kanlin/uia.utils4j.svg)](https://codecov.io/gh/gazer2kanlin/uia.utils4j)
+[![License](https://img.shields.io/github/license/gazer2kanlin/uia.utils4j.svg)](LICENSE)
+
 
 Common utilities.
 
