@@ -47,15 +47,29 @@ public class ByteUtilsTest {
     }
 
     @Test
+    public void testReserved() {
+        byte[] data = new byte[] { 0x01, 0x02 };
+        Assert.assertArrayEquals(new byte[] { 0x02, 0x01 }, ByteUtils.reverse(data));
+    }
+    
+    @Test
     public void testAdd() {
         byte[] a = new byte[] { 0x01, 0x02 };
         byte[] b = new byte[] { 0x01, 0x03 };
         Assert.assertArrayEquals(new byte[] { 0x01, 0x02, 0x01, 0x03 }, ByteUtils.add(a, b));
         Assert.assertArrayEquals(new byte[] { 0x01, 0x02, 0x30, 0x30 }, ByteUtils.add(a, (byte) 0x30, 2));
     }
+    
+    @Test
+    public void testShortValue() {
+        Assert.assertEquals(256, ByteUtils.shortValue(new byte[] { 0x01, 0x00 }), 0);
+        Assert.assertEquals(-2, ByteUtils.shortValue(new byte[] { (byte) 0xff, (byte)0xfe }), 0);
+    }
 
     @Test
     public void testIntValue() throws Exception {
+        Assert.assertEquals(256, ByteUtils.intValue(new byte[] { 0x00, 0x00, 0x01, 0x00 }, 32), 0);
+
         // 11111110
         Assert.assertEquals(-2, ByteUtils.intValue(new byte[] { (byte) 0xfe }, 8));
 
@@ -92,6 +106,14 @@ public class ByteUtilsTest {
         Assert.assertEquals(3402, ByteUtils.bcdValue(new byte[] { (byte) 0x34, (byte) 0x02 }));
         Assert.assertEquals(21232, ByteUtils.bcdValue(new byte[] { (byte) 0x02, (byte) 0x12, (byte) 0x32 }));
     }
+    
+    @Test
+    public void testLongValue() {
+        Assert.assertEquals(256, ByteUtils.longValue(new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00 }, 64), 0);
+        Assert.assertEquals(-2, ByteUtils.longValue(new byte[] { 
+                (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, 
+                (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte)0xfe }, 64), 0);
+    }
 
     @Test
     public void testOffsetBits() {
@@ -127,7 +149,20 @@ public class ByteUtilsTest {
 
         // 11------
         Assert.assertEquals((byte) 0xc0, ByteUtils.valueLeft(value, 2));
-
+    }
+    
+    @Test
+    public void testCompare() {
+        Assert.assertTrue(ByteUtils.compare(new byte[] { 0x01,  0x02, 0x03 }, new byte[] { 0x01,  0x02, 0x03 }));
+        Assert.assertFalse(ByteUtils.compare(null, new byte[] { 0x01,  0x02, 0x03 }));
+    }
+    
+    @Test
+    public void testCopy() {
+        Assert.assertArrayEquals(new byte[] { 0x03 }, ByteUtils.copy(new byte[] { 0x01,  0x02, 0x03 }, 2));
+        Assert.assertArrayEquals(new byte[] { 0x02,  0x03 }, ByteUtils.copy(new byte[] { 0x01,  0x02, 0x03 }, 1, 2));
+        Assert.assertArrayEquals(new byte[] { 0x02,  0x03, 0x00 }, ByteUtils.copy(new byte[] { 0x01,  0x02, 0x03 }, 1, 3));
+        Assert.assertArrayEquals(new byte[] { 0x02,  0x03, 0x20 }, ByteUtils.copy(new byte[] { 0x01,  0x02, 0x03 }, 1, 3, (byte)0x20));
     }
 
     @Test
@@ -171,11 +206,14 @@ public class ByteUtilsTest {
 
     @Test
     public void testToHexString() {
+        Assert.assertEquals("", ByteUtils.toHexString(null));
+        Assert.assertEquals("", ByteUtils.toHexString(new byte[0]));
         Assert.assertEquals("f0", ByteUtils.toHexString((byte) 0xf0));
         Assert.assertEquals("0f", ByteUtils.toHexString((byte) 0x0f));
         Assert.assertEquals("81", ByteUtils.toHexString((byte) 0x81));
         Assert.assertEquals("81-18-00", ByteUtils.toHexString(new byte[] { (byte) 0x81, 0x18, 0x00 }));
         Assert.assertEquals("81,18,00", ByteUtils.toHexString(new byte[] { (byte) 0x81, 0x18, 0x00 }, ","));
+        Assert.assertEquals("81-18-00 ... total:7", ByteUtils.toHexString(new byte[] { (byte) 0x81, 0x18, 0x00, 0x18, 0x00, 0x18, 0x00 }, 3));
     }
 
     @Test

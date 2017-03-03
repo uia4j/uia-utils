@@ -29,7 +29,7 @@ import java.util.TreeMap;
  * @author Kyle K. Lin
  *
  */
-public class ElemArithmetic {
+public final class ElemArithmetic {
 
     /**
      * Function.

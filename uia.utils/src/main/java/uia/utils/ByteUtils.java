@@ -28,8 +28,11 @@ import java.util.List;
  *
  * @author Kyle K. Lin
  */
-public class ByteUtils {
+public final class ByteUtils {
 
+    private ByteUtils() {
+    }
+    
     /**
      * Reverse byte index.
      * @param data Data.

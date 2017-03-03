@@ -29,8 +29,11 @@ import java.lang.reflect.InvocationTargetException;
  *
  * @author Kyle K. Lin
  */
-public class PropertyUtils {
+public final class PropertyUtils {
 
+    private PropertyUtils() {
+    }
+    
     /**
      * Apply value to specific property of block converter.
      *

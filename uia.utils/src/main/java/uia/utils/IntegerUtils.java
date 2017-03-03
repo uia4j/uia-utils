@@ -25,7 +25,10 @@ import java.util.ArrayList;
  *
  * @author Kyle K. Lin
  */
-public class IntegerUtils {
+public final class IntegerUtils {
+
+    private IntegerUtils() {
+    }
 
     /**
      * Convert integer to string.<br>

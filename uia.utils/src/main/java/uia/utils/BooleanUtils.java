@@ -23,8 +23,11 @@ package uia.utils;
  *
  * @author Kyle K. Lin
  */
-public class BooleanUtils {
+public final class BooleanUtils {
 
+    private BooleanUtils() { 
+    }
+    
     /**
      * Convert boolean to Y/N character.
      * @param value Value.

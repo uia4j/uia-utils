@@ -26,8 +26,11 @@ import java.util.Arrays;
  *
  * @author Kyle K. Lin
  */
-public class StringUtils {
+public final class StringUtils {
 
+    private StringUtils() {
+    }
+    
     /**
      * Convert 'Y' or "TRUE" to boolean.
      * @param yn 'Y' or "TRUE"
