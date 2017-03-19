@@ -18,48 +18,34 @@
  *******************************************************************************/
 package uia.utils;
 
-import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Field;
 
 /**
  * Object properties utility.
  *
  * @author Kyle K. Lin
  */
-public final class PropertyUtils {
+public abstract class PropertyUtils {
 
-    private PropertyUtils() {
-    }
-    
     /**
      * Apply value to specific property of block converter.
      *
      * @param obj The block converter.
      * @param propName The property name.
      * @param value The property value.
-     * @throws IntrospectionException bean info exception.
-     * @throws IllegalAccessException bean info exception.
-     * @throws IllegalArgumentException bean info exception.
-     * @throws InvocationTargetException bean info exception.
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
      */
-    public static boolean write(Object obj, String propName, Object value)
-            throws IntrospectionException,
-            IllegalAccessException,
-            IllegalArgumentException,
-            InvocationTargetException {
-
-        BeanInfo info = Introspector.getBeanInfo(obj.getClass());
-        PropertyDescriptor[] pds = info.getPropertyDescriptors();
-        for (PropertyDescriptor pd : pds) {
-            if (pd.getName().equals(propName)) {
-                pd.getWriteMethod().invoke(obj, value);
-                return true;
+    public static boolean write(Object obj, String propName, Object value) throws IllegalArgumentException, IllegalAccessException {
+        Field[] fs = obj.getClass().getDeclaredFields();
+        for(Field f : fs) {
+            if(propName.equals(f.getName())) {
+               f.setAccessible(true);
+               f.set(obj,  value);
+               return true;
             }
         }
-
+        
         return false;
     }
 
@@ -69,25 +55,17 @@ public final class PropertyUtils {
      * @param obj The block converter.
      * @param propName The property name.
      * @return The value.
-     * @throws IntrospectionException bean info exception.
-     * @throws IllegalAccessException bean info exception.
-     * @throws IllegalArgumentException bean info exception.
-     * @throws InvocationTargetException bean info exception.
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
      */
-    public static Object read(Object obj, String propName)
-            throws IntrospectionException,
-            IllegalAccessException,
-            IllegalArgumentException,
-            InvocationTargetException {
-
-        BeanInfo info = Introspector.getBeanInfo(obj.getClass());
-        PropertyDescriptor[] pds = info.getPropertyDescriptors();
-        for (PropertyDescriptor pd : pds) {
-            if (pd.getName().equals(propName)) {
-                return pd.getReadMethod().invoke(obj);
+    public static Object read(Object obj, String propName) throws IllegalArgumentException, IllegalAccessException {
+        Field[] fs = obj.getClass().getDeclaredFields();
+        for(Field f : fs) {
+            if(propName.equals(f.getName())) {
+               f.setAccessible(true);
+               return f.get(obj);
             }
         }
-
         return null;
     }
 }

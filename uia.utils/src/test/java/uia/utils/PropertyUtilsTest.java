@@ -31,8 +31,12 @@ public class PropertyUtilsTest {
     public void testRW() throws Exception {
         TestObj obj = new TestObj();
         Assert.assertEquals("Unknown", PropertyUtils.read(obj, "name"));
+        Assert.assertEquals("Unknown", obj.getName());
+
         Assert.assertTrue(PropertyUtils.write(obj, "name", "John"));
+        
         Assert.assertEquals("John", PropertyUtils.read(obj, "name"));
+        Assert.assertEquals("John", obj.getName());
     }
 
     @Test

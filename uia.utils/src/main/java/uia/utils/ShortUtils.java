@@ -24,10 +24,7 @@ package uia.utils;
  * @author Kyle K. Lin
  *
  */
-public final class ShortUtils {
-
-    private ShortUtils() {
-    }
+public abstract class ShortUtils {
 
     /**
      * Convert short to 2 bytes value.

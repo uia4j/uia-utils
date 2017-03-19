@@ -23,10 +23,7 @@ package uia.utils;
  *
  * @author Kyle K. Lin
  */
-public final class HexStringUtils {
-
-    private HexStringUtils() {
-    }
+public abstract class HexStringUtils {
 
     /**
      * Convert hex string to byte array.
