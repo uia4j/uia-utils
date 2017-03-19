@@ -18,31 +18,37 @@
  *******************************************************************************/
 package uia.utils;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
- * Object properties utility.
+ * Object properties utility.<br>
+ * Use set/get/is method to write/read data.<br>
+ * 
  *
  * @author Kyle K. Lin
  */
 public abstract class PropertyUtils {
 
     /**
-     * Apply value to specific property of block converter.
-     *
+     * Apply value to specific property of block converter.<br>
+     * Method: public void set{PropName}(T value)<br>
+     * 
      * @param obj The block converter.
      * @param propName The property name.
      * @param value The property value.
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
+     * @throws InvocationTargetException 
      */
-    public static boolean write(Object obj, String propName, Object value) throws IllegalArgumentException, IllegalAccessException {
-        Field[] fs = obj.getClass().getDeclaredFields();
-        for(Field f : fs) {
-            if(propName.equals(f.getName())) {
-               f.setAccessible(true);
-               f.set(obj,  value);
-               return true;
+    public static boolean write(Object obj, String propName, Object value) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+        String propMethod = "set" + propName.substring(0, 1).toUpperCase() + propName.substring(1);
+        Method[] ms = obj.getClass().getMethods();
+        for(Method m : ms) {
+            if(propMethod.equals(m.getName())) {
+                m.setAccessible(true);
+                m.invoke(obj, value);
+                return true;
             }
         }
         
@@ -50,22 +56,27 @@ public abstract class PropertyUtils {
     }
 
     /**
-     * Retrieve value to specific property of block converter.
+     * Retrieve value to specific property of block converter.<br>
+     * Method: public T get{PropName}() or<br>
+     * Method: public boolean is{PropName}() or<br>
      *
      * @param obj The block converter.
      * @param propName The property name.
      * @return The value.
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
+     * @throws InvocationTargetException 
      */
-    public static Object read(Object obj, String propName) throws IllegalArgumentException, IllegalAccessException {
-        Field[] fs = obj.getClass().getDeclaredFields();
-        for(Field f : fs) {
-            if(propName.equals(f.getName())) {
-               f.setAccessible(true);
-               return f.get(obj);
+    public static Object read(Object obj, String propName) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+        String propMethod1 = "get" + propName.substring(0, 1).toUpperCase() + propName.substring(1);
+        String propMethod2 = "is" + propName.substring(0, 1).toUpperCase() + propName.substring(1);
+        Method[] ms = obj.getClass().getMethods();
+        for(Method m : ms) {
+            if(propMethod1.equals(m.getName()) || propMethod2.equals(m.getName())) {
+                return m.invoke(obj);
             }
         }
+
         return null;
     }
 }

@@ -25,30 +25,31 @@ import org.junit.Test;
  *
  * @author Kyle
  */
-public class PropertyUtilsTest {
+public class PropertyBeanUtilsTest {
 
     @Test
     public void testRW() throws Exception {
         TestObj2 obj = new TestObj2();
         Assert.assertEquals("Unknown", obj.getName());
-        Assert.assertEquals("Unknown", PropertyUtils.read(obj, "name"));
+        Assert.assertEquals("Unknown", PropertyBeanUtils.read(obj, "name"));
         Assert.assertFalse(obj.isAlive());
-        Assert.assertFalse((Boolean)PropertyUtils.read(obj, "alive"));
+        Assert.assertFalse((Boolean)PropertyBeanUtils.read(obj, "alive"));
 
-        Assert.assertTrue(PropertyUtils.write(obj, "name", "John"));
+        Assert.assertTrue(PropertyBeanUtils.write(obj, "name", "John"));
         
         Assert.assertEquals("John", obj.getName());
-        Assert.assertEquals("John", PropertyUtils.read(obj, "name"));
+        Assert.assertEquals("John", PropertyBeanUtils.read(obj, "name"));
         Assert.assertTrue(obj.isAlive());
-        Assert.assertTrue((Boolean)PropertyUtils.read(obj, "alive"));
+        Assert.assertTrue((Boolean)PropertyBeanUtils.read(obj, "alive"));
     }
 
     @Test
     public void testRWFailed() throws Exception {
         TestObj2 obj = new TestObj2();
-        Assert.assertNull(PropertyUtils.read(obj, "name1"));
-        Assert.assertFalse(PropertyUtils.write(obj, "name1", "John"));
+        Assert.assertNull(PropertyBeanUtils.read(obj, "name1"));
+        Assert.assertFalse(PropertyBeanUtils.write(obj, "name1", "John"));
     }
+
 
     public static class TestObj1 {
 
@@ -69,10 +70,6 @@ public class PropertyUtilsTest {
         public boolean isAlive() {
             return "John".equals(this.name);
         }
-        
-        public void setAlive(boolean alive) {
-        }
-
     }
     
     public static class TestObj2 extends TestObj1 {
