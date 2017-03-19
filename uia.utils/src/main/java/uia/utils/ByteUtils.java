@@ -445,7 +445,7 @@ public abstract  class ByteUtils {
      * Add bytes.
      * @param data Original.
      * @param append Append data
-     * @param result Value.
+     * @return Result.
      */
     public static byte[] add(byte[] data, byte[] append) {
         byte[] result = new byte[data.length + append.length];
@@ -457,9 +457,9 @@ public abstract  class ByteUtils {
     /**
      * Add bytes.
      * @param data Original.
-     * @param b Byte to be added.
+     * @param append Byte to be added.
      * @param count Count.
-     * @param result Value.
+     * @return Result.
      */
     public static byte[] add(byte[] data, byte append, int count) {
         byte[] result = new byte[data.length + count];

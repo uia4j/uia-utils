@@ -25,7 +25,7 @@ package uia.utils;
  * @author Kyle K. Lin
  *
  */
-public abstract  class CRC {
+public abstract class CRC {
 
     public static byte[] crc16(byte[] message) {
 

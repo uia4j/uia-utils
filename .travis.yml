@@ -4,7 +4,6 @@ language: java
 sudo: false
 
 script:
-  - mvn test -f ./uia.utils/pom.xml
   - mvn cobertura:cobertura -f ./uia.utils/pom.xml
 
 after_success:
