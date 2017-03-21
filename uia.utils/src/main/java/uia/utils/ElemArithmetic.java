@@ -110,12 +110,12 @@ public final class ElemArithmetic {
     /**
      * Print function.
      */
-    public void println() {
-        System.out.print(this.func + " >>> ");
+    public String path() {
+        String result = "";
         for (String e : this.postFix) {
-            System.out.print(e + " ");
+            result += " " + e;
         }
-        System.out.println();
+        return result.trim();
     }
 
     private void prepare() {
@@ -139,7 +139,7 @@ public final class ElemArithmetic {
             }
 
             if (number.length() > 0) {
-                this.postFix.add(number);
+                this.postFix.add(number.trim());
                 number = "";
             }
 
@@ -190,7 +190,7 @@ public final class ElemArithmetic {
         }
 
         if (number.length() > 0) {
-            this.postFix.add(number);
+            this.postFix.add(number.trim());
         }
 
         while (!ops.isEmpty()) {
