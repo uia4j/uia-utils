@@ -8,6 +8,16 @@ UIA utils
 
 Common utilities.
 
+### Property Utilities
+
+* PropertyUtils -
+    reflect set/get/is methods to write/read data. This can works well on __Android__.
+
+* PropertyBeanUtils -
+    use __BeanInfo__ to write/read data. __Android__ doesn't support __java.bean__ package.
+
+
+
 ## Copyright and License
 
 Licensed under the Apache License, Version 2.0 (the "License");

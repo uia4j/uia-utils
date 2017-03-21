@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uia</groupId>
 	<artifactId>uia.utils</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.2</version>
 	<packaging>jar</packaging>
 	<name>uia.utils</name>
 	<url>https://github.com/gazer2kanlin/uia.utils4j</url>
