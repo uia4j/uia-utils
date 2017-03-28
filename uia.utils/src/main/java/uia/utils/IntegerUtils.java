@@ -61,14 +61,15 @@ public abstract class IntegerUtils {
      */
     public static byte[] bcdValue(int value) {
         ArrayList<Byte> data = new ArrayList<Byte>();
+        int _value = value;
         do {
-            int rem = value % 100;
-            value = (value - rem) / 100;
+            int rem = _value % 100;
+            _value = (_value - rem) / 100;
             byte b = (byte) ((rem / 10) << 4);
             b += rem % 10;
             data.add(0, b);
         }
-        while (value != 0);
+        while (_value != 0);
 
         byte[] result = new byte[data.size()];
         for (int i = 0; i < result.length; i++) {

@@ -29,9 +29,6 @@ import org.junit.Test;
  */
 public class StringUtilsTest {
 
-    public StringUtilsTest() {
-    }
-
     @Test
     public void testBool() throws Exception {
         Assert.assertEquals(true, StringUtils.bool("Y"));

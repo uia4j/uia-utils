@@ -62,8 +62,9 @@ public final class ElemArithmetic {
      * @return Result.
      */
     public double calculate(Map<String, Object> paramValues) {
-        if (paramValues == null) {
-            paramValues = new TreeMap<String, Object>();
+        Map<String, Object> _paramValues = paramValues;
+        if (_paramValues == null) {
+            _paramValues = new TreeMap<String, Object>();
         }
 
         Stack<Double> value = new Stack<Double>();
@@ -99,7 +100,7 @@ public final class ElemArithmetic {
                 //System.out.println(String.format("%s ^ %s", v2, v1));
             }
             else {
-                Object result = paramValues.get(elem);
+                Object result = _paramValues.get(elem);
                 value.push(Double.parseDouble(result == null ? elem : "" + result));
             }
         }

@@ -27,9 +27,6 @@ import org.junit.Test;
  */
 public class BooleanUtilsTest {
 
-    public BooleanUtilsTest() {
-    }
-
     @Test
     public void testToString() throws Exception {
         Assert.assertEquals("TRUE", BooleanUtils.toTF(true));

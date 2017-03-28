@@ -3,6 +3,7 @@ UIA utils
 
 [![Build Status](https://travis-ci.org/gazer2kanlin/uia.utils4j.svg?branch=master)](https://travis-ci.org/gazer2kanlin/uia.utils4j)
 [![Codecov](https://img.shields.io/codecov/c/github/gazer2kanlin/uia.utils4j.svg)](https://codecov.io/gh/gazer2kanlin/uia.utils4j)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d7210af12c1c4d4f8bbc3e84f0ad4a71)](https://www.codacy.com/app/gazer2kanlin/uia-utils4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gazer2kanlin/uia.utils4j&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/github/license/gazer2kanlin/uia.utils4j.svg)](LICENSE)
 
 

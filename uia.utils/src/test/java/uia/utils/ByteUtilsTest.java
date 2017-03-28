@@ -32,9 +32,6 @@ import org.junit.Test;
  */
 public class ByteUtilsTest {
 
-    public ByteUtilsTest() {
-    }
-
     @Test
     @Ignore
     public void testDoubleByte() {

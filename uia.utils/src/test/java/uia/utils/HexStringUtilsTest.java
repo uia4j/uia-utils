@@ -27,9 +27,6 @@ import org.junit.Test;
  */
 public class HexStringUtilsTest {
 
-    public HexStringUtilsTest() {
-    }
-
     @Test
     public void testToBytes() throws Exception {
         Assert.assertArrayEquals(
