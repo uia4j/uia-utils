@@ -64,7 +64,8 @@ public abstract class StringUtils {
 
         byte[] result = new byte[length];
         Arrays.fill(result, empty);
-        for (int i = 0, cnt = Math.min(length, temp.length); i < cnt; i++) {
+        int _len = Math.min(length, temp.length);
+        for (int i = 0; i < _len; i++) {
             result[i] = temp[i];
         }
 

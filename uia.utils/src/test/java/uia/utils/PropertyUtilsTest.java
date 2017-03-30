@@ -52,27 +52,23 @@ public class PropertyUtilsTest {
 
     public static class TestObj1 {
 
-        private String name;
+        private String _name;
 
         public TestObj1() {
-            this.name = "Unknown";
+            this._name = "Unknown";
         }
 
         public String getName() {
-            return this.name;
+            return this._name;
         }
 
         public void setName(String name) {
-            this.name = name;
+            this._name = name;
         }
         
         public boolean isAlive() {
-            return "John".equals(this.name);
+            return "John".equals(this._name);
         }
-        
-        public void setAlive(boolean alive) {
-        }
-
     }
     
     public static class TestObj2 extends TestObj1 {

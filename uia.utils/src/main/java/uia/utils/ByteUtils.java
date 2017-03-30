@@ -429,14 +429,15 @@ public abstract  class ByteUtils {
     }
 
     /**
-     * Convert byte list to array.
+     * Convert byte list to array. Null Byte will be 0x00.
      * @param data Value
      * @return Result.
      */
     public static byte[] toArray(List<Byte> data) {
         byte[] result = new byte[data.size()];
         for (int i = 0; i < result.length; i++) {
-            result[i] = data.get(i);
+            Byte b = data.get(i);
+            result[i] = b == null ? 0x00 : b;
         }
         return result;
     }

@@ -21,9 +21,9 @@ package uia.utils;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -31,16 +31,30 @@ import org.junit.Test;
  * @author Kyle
  */
 public class ByteUtilsTest {
+    
+    @Test
+    public void testList2Array() {
+        ArrayList<Byte> data1 = new ArrayList<Byte>();
+        data1.add((byte)0x01);
+        data1.add((byte)0x02);
+        data1.add(null);
+        data1.add((byte)0xfe);
+        data1.add((byte)0xff);
+        Assert.assertArrayEquals(new byte[] { 0x01, 0x02, 0x00, (byte)0x0fe, (byte)0x0ff }, ByteUtils.toArray(data1));
+    }
 
     @Test
-    @Ignore
     public void testDoubleByte() {
         byte[] v1 = ByteBuffer.allocate(8).order(ByteOrder.BIG_ENDIAN).putDouble(12.9d).array();
-        byte[] v2 = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN).putDouble(13.9d).array();
-        System.out.println(ByteUtils.toHexString(v1));
-        System.out.println(ByteUtils.toHexString(v2));
-        System.out.println("v1=" + ByteBuffer.wrap(v1).getDouble());
-        System.out.println("v2=" + ByteBuffer.wrap(v2).order(ByteOrder.LITTLE_ENDIAN).getDouble());
+        byte[] v2 = ByteBuffer.allocate(8).order(ByteOrder.LITTLE_ENDIAN).putDouble(12.9d).array();
+        Assert.assertArrayEquals(v1, ByteUtils.reverse(v2));
+        Assert.assertFalse(ByteUtils.compare(v1,  v2));
+        Assert.assertTrue(ByteUtils.compare(v1,  ByteUtils.reverse(v2)));
+        
+
+        double _v1  = ByteBuffer.wrap(v1).getDouble();
+        double _v2  = ByteBuffer.wrap(v2).order(ByteOrder.LITTLE_ENDIAN).getDouble();
+        Assert.assertEquals(_v1, _v2, 1);
     }
 
     @Test
@@ -117,6 +131,24 @@ public class ByteUtilsTest {
         // 11110000 01001111 10000100 10000000
         byte[] data = new byte[] { (byte) 0xf0, (byte) 0x4f, (byte) 0x84, (byte) 0x80 };
 
+        // 10000000
+        Assert.assertArrayEquals(
+                new byte[] { (byte)0x80 },
+                ByteUtils.offsetBits(data, 0, 1));
+        // 11000000
+        Assert.assertArrayEquals(
+                new byte[] { (byte)0xc0 },
+                ByteUtils.offsetBits(data, 0, 2));
+        // 1110000
+        Assert.assertArrayEquals(
+                new byte[] { (byte)0xe0 },
+                ByteUtils.offsetBits(data, 0, 3));
+        // 11110000
+        Assert.assertArrayEquals(
+                new byte[] { (byte)0xf0 },
+                ByteUtils.offsetBits(data, 0, 4));
+        
+        
         // 00011110 00001001 11110000 10010000 0000000
         Assert.assertArrayEquals(
                 new byte[] { 0x1e, 0x09, (byte) 0xf0, (byte) 0x90, 0x00 },
@@ -203,7 +235,7 @@ public class ByteUtilsTest {
 
     @Test
     public void testToHexString() {
-        Assert.assertEquals("", ByteUtils.toHexString(null));
+        Assert.assertEquals("", ByteUtils.toHexString(null, 10));
         Assert.assertEquals("", ByteUtils.toHexString(new byte[0]));
         Assert.assertEquals("f0", ByteUtils.toHexString((byte) 0xf0));
         Assert.assertEquals("0f", ByteUtils.toHexString((byte) 0x0f));
