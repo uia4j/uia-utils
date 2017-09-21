@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class StreamCube<T> implements Cube<T> {
 
-    final Stream<Data<T>> data;
+    private final Stream<Data<T>> data;
 
     StreamCube(Stream<Data<T>> data) {
         this.data = data;
@@ -28,7 +28,7 @@ public class StreamCube<T> implements Cube<T> {
     public Map<String, List<T>> mapping(final String tagName) {
         return this.data.collect(
                 Collectors.groupingBy(
-                        d -> d.tags.get(tagName),
+                        d -> d.getTag(tagName),
                         Collectors.mapping(v -> v.value, Collectors.toList())));
     }
 
@@ -41,6 +41,6 @@ public class StreamCube<T> implements Cube<T> {
 
     @Override
     public Cube<T> select(String tagName, String tagValue) {
-        return new StreamCube<T>(this.data.filter(d -> tagValue.equals(d.tags.get(tagName))));
+        return new StreamCube<T>(this.data.filter(d -> tagValue.equals(d.getTag(tagName))));
     }
 }

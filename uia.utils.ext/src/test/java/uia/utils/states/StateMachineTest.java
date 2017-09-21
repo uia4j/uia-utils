@@ -1,5 +1,6 @@
 package uia.utils.states;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class StateMachineTest {
@@ -15,6 +16,8 @@ public class StateMachineTest {
     private static String NEXT = "NEXT";
 
     private static String RUN_HOLD = "RUN_HOLD";
+
+    private int event;
 
     @Test
     public void testSimple() {
@@ -49,19 +52,28 @@ public class StateMachineTest {
         machine.register(RUN_HOLD);
 
         machine.changeState(IDLE);
+        Assert.assertEquals(IDLE, machine.getCurrState().getName());
 
         machine.run(null, "validateLot", null);
-        machine.println();
+        Assert.assertEquals(IDLE, machine.getCurrState().getName());
+
+        machine.run(null, "trackIn", null); // NO CHANGED
+        Assert.assertEquals(IDLE, machine.getCurrState().getName());
+
         machine.run(null, "moveIn", null);
-        machine.println();
+        Assert.assertEquals(PRE_PROCESS, machine.getCurrState().getName());
+
         machine.run(null, "trackIn", null);
-        machine.println();
+        Assert.assertEquals(PROCESSING, machine.getCurrState().getName());
+
         machine.run(null, "trackOut", null);
-        machine.println();
+        Assert.assertEquals(POST_PROCESS, machine.getCurrState().getName());
+
         machine.run(null, "moveOut", null);
-        machine.println();
+        Assert.assertEquals(NEXT, machine.getCurrState().getName());
+
         machine.run(null, "ready", null);
-        machine.println();
+        Assert.assertEquals(IDLE, machine.getCurrState().getName());
     }
 
     @Test
@@ -96,22 +108,30 @@ public class StateMachineTest {
         // RUN_HOLD
         machine.register(RUN_HOLD);
 
-        machine.addEventListener("trackIn", a -> System.out.println(">>> trackIn"));
+        // EVENT LISTENERS
+        machine.addChangeListener(IDLE, PRE_PROCESS, a -> Assert.assertEquals(2, this.event));
+        machine.addEventListener("trackIn", a -> Assert.assertEquals(3, this.event));
+        machine.addEventListener("moveOut", a -> Assert.assertEquals(5, this.event));
 
         machine.changeState(IDLE);
 
+        this.event = 1;
         machine.run(null, "validateLot", null);
-        machine.println();
+
+        this.event = 2;
         machine.run(null, "moveIn", null);
-        machine.println();
+
+        this.event = 3;
         machine.run(null, "trackIn", null);
-        machine.println();
+
+        this.event = 4;
         machine.run(null, "trackOut", null);
-        machine.println();
+
+        this.event = 5;
         machine.run(null, "moveOut", null);
-        machine.println();
+
+        this.event = 6;
         machine.run(null, "ready", null);
-        machine.println();
     }
 
     private String validateLot(Object controller, Object args) {

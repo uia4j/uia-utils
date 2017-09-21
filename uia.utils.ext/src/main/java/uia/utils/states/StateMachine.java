@@ -187,7 +187,7 @@ public class StateMachine<C> {
                 this.prevState));
     }
 
-    void raiseStateChanged(String eventName, String fromStateName, String toStateName) {
+    private void raiseStateChanged(String eventName, String fromStateName, String toStateName) {
         String key = genKey(fromStateName, toStateName);
         List<StateListener> listeners = this.stateChangedListeners.get(key);
         if (listeners == null) {
@@ -198,7 +198,7 @@ public class StateMachine<C> {
         }
     }
 
-    void raiseEvent(String eventName) {
+    private void raiseEvent(String eventName) {
         List<StateListener> listeners = this.eventListeners.get(eventName);
         if (listeners == null) {
             return;

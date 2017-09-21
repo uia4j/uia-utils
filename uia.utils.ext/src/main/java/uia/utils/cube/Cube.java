@@ -19,18 +19,22 @@ public interface Cube<T> {
 
     public static class Data<T> {
 
-        final TreeMap<String, String> tags;
+        private final TreeMap<String, String> tags;
 
-        final T value;
+        public final T value;
 
         Data(T value) {
             this.tags = new TreeMap<String, String>();
             this.value = value;
         }
 
-        public Data<T> addTag(String name, String value) {
-            this.tags.put(name, value);
+        public Data<T> addTag(String tagName, String tagValue) {
+            this.tags.put(tagName, tagValue);
             return this;
+        }
+
+        public String getTag(String tagName) {
+            return this.tags.get(tagName);
         }
     }
 }
