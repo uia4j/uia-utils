@@ -17,18 +17,18 @@ import java.util.Properties;
 public class FileUtils {
 
     /**
-     * 
-     * @param path
-     * @param props
+     * Load properties from file.
+     * @param path File path.
+     * @param props Original properties.
      */
     public static void loadProps(String path, Properties props) {
         loadProps(new File(path), props);
     }
 
     /**
-     * 
-     * @param file
-     * @param props
+     * Load properties from file.
+     * @param file File.
+     * @param props Original properties.
      */
     public static void loadProps(File file, Properties props) {
         InputStream is = null;
@@ -52,18 +52,18 @@ public class FileUtils {
     }
 
     /**
-     * 
-     * @param path
-     * @param props
+     * Save properties to file.
+     * @param path File path.
+     * @param props Properties.
      */
     public static void saveProps(String path, Properties props) {
         saveProps(new File(path), props);
     }
 
     /**
-     * 
-     * @param file
-     * @param props
+     * Save properties to file.
+     * @param file File
+     * @param props Properties.
      */
     public static void saveProps(File file, Properties props) {
         OutputStream out = null;
@@ -87,10 +87,10 @@ public class FileUtils {
     }
 
     /**
-     * 
-     * @param path
-     * @return
-     * @throws IOException
+     * Read content from file.
+     * @param path File path.
+     * @return Content.
+     * @throws IOException IO exception.
      */
     public static String readContent(String path) throws IOException {
         return readContent(new File(path));
@@ -98,10 +98,10 @@ public class FileUtils {
     }
     
     /**
-     * 
-     * @param file
-     * @return
-     * @throws IOException
+     * Read content from file.
+     * @param file File.
+     * @return Content.
+     * @throws IOException IO exception.
      */
     public static String readContent(File file) throws IOException {
         byte[] bytesArray = new byte[(int) file.length()];

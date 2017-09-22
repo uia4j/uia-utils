@@ -109,7 +109,8 @@ public final class ElemArithmetic {
     }
 
     /**
-     * Print function.
+     * Get path.
+     * @return Path.
      */
     public String path() {
         String result = "";

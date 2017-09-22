@@ -37,6 +37,7 @@ public abstract class PropertyBeanUtils {
      * @param obj The block converter.
      * @param propName The property name.
      * @param value The property value.
+     * @return Result.
      * @throws IntrospectionException bean info exception.
      * @throws IllegalAccessException bean info exception.
      * @throws IllegalArgumentException bean info exception.

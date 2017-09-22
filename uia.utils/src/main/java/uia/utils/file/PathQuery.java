@@ -19,10 +19,10 @@ public class PathQuery {
     private SimpleDateFormat pathPattern;
 
     /**
-     *
-     * @param root
-     * @param pathPattern
-     * @param rolling
+     * Constructor.
+     * @param root Root path.
+     * @param pathPattern Date time naming pattern.
+     * @param rolling Rolling type of file name.
      */
     public PathQuery(String root, String pathPattern, TimeRollingType rolling) {
         this.root = root;
@@ -30,6 +30,12 @@ public class PathQuery {
         this.rolling = rolling;
     }
 
+    /**
+     * Select files depending on file name with date time pattern.
+     * @param begin Begin time.
+     * @param end End time.
+     * @return Result.
+     */
     public synchronized List<FileQuery> select(final long begin, final long end) {
         ArrayList<FileQuery> result = new ArrayList<FileQuery>();
 

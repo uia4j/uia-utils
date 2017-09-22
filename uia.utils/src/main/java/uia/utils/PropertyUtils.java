@@ -37,9 +37,10 @@ public abstract class PropertyUtils {
      * @param obj The block converter.
      * @param propName The property name.
      * @param value The property value.
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException 
+     * @return Result.
+     * @throws IllegalArgumentException Exception.
+     * @throws IllegalAccessException Exception.
+     * @throws InvocationTargetException  Exception.
      */
     public static boolean write(Object obj, String propName, Object value) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         String propMethod = "set" + propName.substring(0, 1).toUpperCase() + propName.substring(1);
@@ -63,9 +64,9 @@ public abstract class PropertyUtils {
      * @param obj The block converter.
      * @param propName The property name.
      * @return The value.
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException 
+     * @throws IllegalArgumentException Exception.
+     * @throws IllegalAccessException Exception.
+     * @throws InvocationTargetException Exception.
      */
     public static Object read(Object obj, String propName) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         String propMethod1 = "get" + propName.substring(0, 1).toUpperCase() + propName.substring(1);

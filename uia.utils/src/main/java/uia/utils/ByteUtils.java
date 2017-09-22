@@ -269,7 +269,6 @@ public abstract  class ByteUtils {
      * @param length Byte count.
      * @param charset Charset
      * @return Result.
-     * @throws UnsupportedEncodingException
      */
     public static String toString(byte[] data, int from, int length, Charset charset) {
         return new String(Arrays.copyOfRange(data, from, from + length), charset);
