@@ -21,8 +21,8 @@ public class FileUtils {
      * @param path File path.
      * @param props Original properties.
      */
-    public static void loadProps(String path, Properties props) {
-        loadProps(new File(path), props);
+    public static boolean loadProps(String path, Properties props) {
+        return loadProps(new File(path), props);
     }
 
     /**
@@ -30,14 +30,15 @@ public class FileUtils {
      * @param file File.
      * @param props Original properties.
      */
-    public static void loadProps(File file, Properties props) {
+    public static boolean loadProps(File file, Properties props) {
         InputStream is = null;
         try {
             is = new FileInputStream(file);
             props.load(is);
+            return true;
         }
         catch (Exception e) {
-
+            return false;
         }
         finally {
             if (is != null) {
@@ -56,8 +57,8 @@ public class FileUtils {
      * @param path File path.
      * @param props Properties.
      */
-    public static void saveProps(String path, Properties props) {
-        saveProps(new File(path), props);
+    public static boolean saveProps(String path, Properties props) {
+        return saveProps(new File(path), props);
     }
 
     /**
@@ -65,14 +66,15 @@ public class FileUtils {
      * @param file File
      * @param props Properties.
      */
-    public static void saveProps(File file, Properties props) {
+    public static boolean saveProps(File file, Properties props) {
         OutputStream out = null;
         try {
             out = new FileOutputStream(file);
             props.store(out, null);
+            return true;
         }
         catch (Exception e) {
-
+            return false;
         }
         finally {
             if (out != null) {
@@ -94,7 +96,17 @@ public class FileUtils {
      */
     public static String readContent(String path) throws IOException {
         return readContent(new File(path));
-        // return new String(Files.readAllBytes(Paths.get(path)));
+    }
+
+    /**
+     * Read content from file.
+     * @param path File path.
+     * @param charsetName Charset name.
+     * @return Content.
+     * @throws IOException IO exception.
+     */
+    public static String readContent(String path, String charsetName) throws IOException {
+        return readContent(new File(path), charsetName);
     }
     
     /**
@@ -104,11 +116,22 @@ public class FileUtils {
      * @throws IOException IO exception.
      */
     public static String readContent(File file) throws IOException {
+        return readContent(file, "utf-8");
+    }
+    
+    /**
+     * Read content from file.
+     * @param file File.
+     * @param charsetName Charset name.
+     * @return Content.
+     * @throws IOException IO exception.
+     */
+    public static String readContent(File file, String charsetName) throws IOException {
         byte[] bytesArray = new byte[(int) file.length()];
         FileInputStream fis = new FileInputStream(file);
         fis.read(bytesArray);
         fis.close();
 
-        return new String(bytesArray);   
+        return new String(bytesArray, charsetName);   
     }
 }

@@ -13,22 +13,44 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
-public class PropsUtils {
+public final class PropsUtils {
 
     private Properties props;
 
+    /**
+     * Constructor.
+     * @param path Path.
+     * @throws IOException IO failed.
+     */
     public PropsUtils(String path) throws IOException {
-        this(new File(path), new Properties());
+        this(new File(path));
     }
 
+    /**
+     * Constructor.
+     * @param path Path.
+     * @param props Initial properties.
+     * @throws IOException IO failed.
+     */
     public PropsUtils(String path, Properties props) throws IOException {
         this(new File(path), props);
     }
 
+    /**
+     * Constructor.
+     * @param file File.
+     * @throws IOException IO failed.
+     */
     public PropsUtils(File file) throws IOException {
         this(file, new Properties());
     }
 
+    /**
+     * Constructor.
+     * @param file File.
+     * @param props Initial properties.
+     * @throws IOException IO failed.
+     */
     public PropsUtils(File file, Properties props) throws IOException {
         InputStream is = null;
         try {
