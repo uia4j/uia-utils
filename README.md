@@ -8,17 +8,42 @@ UIA Utils
 [![License](https://img.shields.io/github/license/gazer2kanlin/uia.utils4j.svg)](LICENSE)
 
 
-Common utilities.
+## Utils Collection
 
-### Property Utilities
+### Common
+#### Properties of Object
 
 * PropertyUtils -
     reflect set/get/is methods to write/read data. This can works well on __Android__.
 
 * PropertyBeanUtils -
-    use __BeanInfo__ to write/read data. __Android__ doesn't support __java.bean__ package.
+    use `BeanInfo` to write/read data. __Android__ doesn't support `java.bean` package.
 
+### File
+#### Time Rolling
+Search paths and files depending on time based naming rule.
 
+__Example 1__
+
+Use `PathQuery` to search sub path of __data/min/__ which folder naming matches __yyyy/MM/dd/HH__.
+
+```java
+PathQuery query = new PathQuery("data/min/", "yyyy/MM/dd/HH", TimeRollingType.HOUR);
+List<FileQuery> queries = query.select(begin, end);
+```
+
+__Example 2__
+
+Use `FileQuery` to search files with naming rule:
+
+* __yyyyMMddHH__ - time based naming
+* __HR___ - prefix
+* __.json__ - postfix
+
+```java
+FileQuery fileQuery = ...;
+List<FileInfo> fis = fileQuery.select("HR_", ".json", "yyyyMMddHH", TimeRollingType.HOUR);
+```
 
 ## Copyright and License
 
