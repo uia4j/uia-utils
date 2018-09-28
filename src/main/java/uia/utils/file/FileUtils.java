@@ -20,6 +20,7 @@ public class FileUtils {
      * Load properties from file.
      * @param path File path.
      * @param props Original properties.
+     * @return Success or not.
      */
     public static boolean loadProps(String path, Properties props) {
         return loadProps(new File(path), props);
@@ -29,6 +30,7 @@ public class FileUtils {
      * Load properties from file.
      * @param file File.
      * @param props Original properties.
+     * @return Success or not.
      */
     public static boolean loadProps(File file, Properties props) {
         InputStream is = null;
@@ -56,6 +58,7 @@ public class FileUtils {
      * Save properties to file.
      * @param path File path.
      * @param props Properties.
+     * @return Success or not.
      */
     public static boolean saveProps(String path, Properties props) {
         return saveProps(new File(path), props);
@@ -65,6 +68,7 @@ public class FileUtils {
      * Save properties to file.
      * @param file File
      * @param props Properties.
+     * @return Success or not.
      */
     public static boolean saveProps(File file, Properties props) {
         OutputStream out = null;
