@@ -6,7 +6,7 @@
 	<version>0.2.0</version>
 	<packaging>jar</packaging>
 	<name>uia-utils</name>
-	<url>https://github.com/gazer2kanlin/uia.utils4j</url>
+	<url>https://github.com/uia4j/uia-utils</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
@@ -70,12 +70,12 @@
 	</build>
 	<scm>
 		<developerConnection>Kyle K. Lin</developerConnection>
-		<url>https://github.com/gazer2kanlin/uia.utils4j</url>
+		<url>https://github.com/uia4j/uia-utils</url>
 	</scm>
 	<distributionManagement>
 		<repository>
 			<id>bintray-my-maven</id>
-			<url>https://api.bintray.com/maven/gazer2kanlin/maven/uia-utils4j/;publish=1</url>
+			<url>https://api.bintray.com/maven/uia4j/maven/uia-utils/;publish=1</url>
 		</repository>
 	</distributionManagement>
 </project>
