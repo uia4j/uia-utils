@@ -68,13 +68,6 @@
 			</plugin>
 		</plugins>
 	</build>
-<<<<<<< HEAD
-	<scm>
-		<developerConnection>Kyle K. Lin</developerConnection>
-		<url>https://github.com/uia4j/uia-utils</url>
-	</scm>
-=======
->>>>>>> develop
 	<distributionManagement>
 		<repository>
 			<id>bintray-my-maven</id>
