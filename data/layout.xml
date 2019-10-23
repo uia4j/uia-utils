@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns="http://grid.pdf.uia/layout">
+	<grid name="image">
+		<columns height="20" visible="false">
+			<column width="100%" bind="imageInfo" cellRenderer="uia.pdf.grid.ImageDescCellRenderer" alignment="CENTER"><text></text></column>
+		</columns>
+	</grid>
+	<grid name="employee">
+		<columns visible="true" height="20">
+			<column width="100" bind="id" wrap="true"><text>編號</text></column>
+			<column width="150" bind="name" wrap="true"><text>姓名</text></column>
+			<column width="120" bind="birthday" alignment="center" wrap="true"><text>生日</text></column>
+			<column width="+100%" bind="department" wrap="true"><text>所屬部門</text></column>
+		</columns>
+	</grid>
+    <grid name="project">
+		<columns visible="true" height="20" background="200,255,255">
+			<column width="100" bind="projectName" wrap="true"><text>專案名稱</text></column>
+			<column width="120" bind="startDate" alignment="FAR"><text>開始日期</text></column>
+			<column width="120" bind="endDate" alignment="FAR"><text>結束日期</text></column>
+			<column width="70" bind="location"><text>地點</text></column>
+			<column width="80" bind="pm"><text>專案經理</text></column>
+			<column width="80" bind="qm"><text>品保經理</text></column>
+			<column width="+100%" bind="remark"><text>備註</text></column>
+		</columns>
+	</grid>
+</layout>

@@ -247,9 +247,7 @@ public class ByteUtilsTest {
 
     @Test
     public void testToString() {
-        byte[] utf8 = StringUtils.toBytes("這是中文", 12, (byte) 0x20);
-        byte[] big5 = StringUtils.toBytes("這是中文", 8, (byte) 0x20, Charset.forName("Big5"));
-        //Assert.assertEquals("這是中文", ByteUtils.toString(utf8, 0, utf8.length));
-        //Assert.assertEquals("這是中文", ByteUtils.toString(big5, 0, big5.length, Charset.forName("Big5")));
+        byte[] utf8 = StringUtils.toBytes("這是中文", 12, (byte) 0x20, Charset.forName("utf-8"));
+        Assert.assertEquals("這是中文", ByteUtils.toString(utf8, 0, utf8.length, Charset.forName("utf-8")));
     }
 }

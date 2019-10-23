@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.uia.solution</groupId>
 	<artifactId>uia-utils</artifactId>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<packaging>jar</packaging>
 	<name>uia-utils</name>
 	<url>https://github.com/uia4j/uia-utils</url>
@@ -68,14 +68,23 @@
 			</plugin>
 		</plugins>
 	</build>
+<<<<<<< HEAD
 	<scm>
 		<developerConnection>Kyle K. Lin</developerConnection>
 		<url>https://github.com/uia4j/uia-utils</url>
 	</scm>
+=======
+>>>>>>> develop
 	<distributionManagement>
 		<repository>
 			<id>bintray-my-maven</id>
 			<url>https://api.bintray.com/maven/uia4j/maven/uia-utils/;publish=1</url>
 		</repository>
 	</distributionManagement>
+	<organization>
+		<url>https://github.com/uia4j</url>
+	</organization>
+	<issueManagement>
+		<url>https://github.com/uia4j/uia-utils/Issues</url>
+	</issueManagement>
 </project>
