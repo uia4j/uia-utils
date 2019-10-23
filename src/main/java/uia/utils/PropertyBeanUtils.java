@@ -32,7 +32,7 @@ import java.lang.reflect.InvocationTargetException;
 public abstract class PropertyBeanUtils {
 
     /**
-     * Apply value to specific property of block converter.
+     * Apply value to the property of the object.
      *
      * @param obj The block converter.
      * @param propName The property name.
@@ -43,7 +43,11 @@ public abstract class PropertyBeanUtils {
      * @throws IllegalArgumentException bean info exception.
      * @throws InvocationTargetException bean info exception.
      */
-    public static boolean write(Object obj, String propName, Object value) throws IntrospectionException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+    public static boolean write(Object obj, String propName, Object value) 
+    		throws IntrospectionException, 
+    		IllegalArgumentException, 
+    		IllegalAccessException, 
+    		InvocationTargetException {
         BeanInfo info = Introspector.getBeanInfo(obj.getClass());
         PropertyDescriptor[] pds = info.getPropertyDescriptors();
         for (PropertyDescriptor pd : pds) {
@@ -57,11 +61,11 @@ public abstract class PropertyBeanUtils {
     }
 
     /**
-     * Retrieve value to specific property of block converter.
+     * Get the property value of the object.
      *
      * @param obj The block converter.
      * @param propName The property name.
-     * @return The value.
+     * @return The property value or null if not exists.
      * @throws IntrospectionException bean info exception.
      * @throws IllegalAccessException bean info exception.
      * @throws IllegalArgumentException bean info exception.
