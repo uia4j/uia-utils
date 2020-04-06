@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -39,8 +40,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
 
+import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+
 public class JaxbUtils<T> {
-	
+
     private Unmarshaller unmarshaller;
 
     private Marshaller marshaller;
@@ -51,6 +54,8 @@ public class JaxbUtils<T> {
 
     private Class<T> cls;
 
+    private HashMap<String, String> namespaceMap;
+
     public JaxbUtils(Class<T> cls, String rootElement, String namespace, String packageName) throws JAXBException {
         this(cls, rootElement, namespace, packageName, null);
     }
@@ -59,6 +64,7 @@ public class JaxbUtils<T> {
         this.cls = cls;
         this.rootElement = rootElement;
         this.namespace = namespace;
+        this.namespaceMap = new HashMap<String, String>();
 
         JAXBContext jc = JAXBContext.newInstance(packageName);
         this.unmarshaller = jc.createUnmarshaller();
@@ -69,9 +75,14 @@ public class JaxbUtils<T> {
         this.marshaller = jc.createMarshaller();
         this.marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_ENCODING, "UTF-8");
         this.marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        this.marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper", new XMLNamespacePrefixMapper());
         if (schema != null) {
             this.marshaller.setSchema(schema);
         }
+    }
+
+    public void addNamespacePrefix(String namespace, String prefix) {
+        this.namespaceMap.put(namespace, prefix);
     }
 
     public String toXml(T value) throws Exception {
@@ -124,6 +135,24 @@ public class JaxbUtils<T> {
         return elem.getValue();
     }
 
+    public class XMLNamespacePrefixMapper extends NamespacePrefixMapper {
+
+        /**
+         * Create mappings.
+         */
+        public XMLNamespacePrefixMapper() {
+        }
+
+        /* (non-Javadoc)
+         * Returning null when not found based on spec.
+         * @see com.sun.xml.bind.marshaller.NamespacePrefixMapper#getPreferredPrefix(java.lang.String, java.lang.String, boolean)
+         */
+        @Override
+        public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
+            return JaxbUtils.this.namespaceMap.getOrDefault(namespaceUri, suggestion);
+        }
+    }
+
     /**
      *
      * @author Kyle K. Lin
@@ -138,6 +167,11 @@ public class JaxbUtils<T> {
         @Override
         public void startElement(String uri, String localName, String qName, org.xml.sax.Attributes attributes) throws SAXException {
             super.startElement(JaxbUtils.this.namespace, localName, qName, attributes);
+        }
+
+        @Override
+        public void endElement(String uri, String localName, String qName) throws SAXException {
+            super.endElement(JaxbUtils.this.namespace, localName, qName);
         }
     }
 }

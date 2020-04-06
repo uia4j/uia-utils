@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lo:layout xmlns:lo="http://lo:grid.pdf.uia/layout">
+	<lo:grid name="image">
+		<lo:columns height="20" visible="false">
+			<lo:column width="100%" bind="imageInfo" cellRenderer="uia.pdf.lo:grid.ImageDescCellRenderer" alignment="CENTER"><lo:text></lo:text></lo:column>
+		</lo:columns>
+	</lo:grid>
+	<lo:grid name="employee">
+		<lo:columns visible="true" height="20">
+			<lo:column width="100" bind="id" wrap="true"><lo:text>編號</lo:text></lo:column>
+			<lo:column width="150" bind="name" wrap="true"><lo:text>姓名</lo:text></lo:column>
+			<lo:column width="120" bind="birthday" alignment="center" wrap="true"><lo:text>生日</lo:text></lo:column>
+			<lo:column width="+100%" bind="department" wrap="true"><lo:text>所屬部門</lo:text></lo:column>
+		</lo:columns>
+	</lo:grid>
+    <lo:grid name="project">
+		<lo:columns visible="true" height="20" background="200,255,255">
+			<lo:column width="100" bind="projectName" wrap="true"><lo:text>專案名稱</lo:text></lo:column>
+			<lo:column width="120" bind="startDate" alignment="FAR"><lo:text>開始日期</lo:text></lo:column>
+			<lo:column width="120" bind="endDate" alignment="FAR"><lo:text>結束日期</lo:text></lo:column>
+			<lo:column width="70" bind="location"><lo:text>地點</lo:text></lo:column>
+			<lo:column width="80" bind="pm"><lo:text>專案經理</lo:text></lo:column>
+			<lo:column width="80" bind="qm"><lo:text>品保經理</lo:text></lo:column>
+			<lo:column width="+100%" bind="remark"><lo:text>備註</lo:text></lo:column>
+		</lo:columns>
+	</lo:grid>
+</lo:layout>
