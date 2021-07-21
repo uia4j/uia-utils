@@ -8,6 +8,7 @@ public class ObjectUtils {
 	/**
 	 * Check if value is not null.
 	 * 
+	 * @param <T> Date type.
 	 * @param value The value.
 	 * @return The value self.
 	 * @throws NullPointerException Raise if value is null.
@@ -22,6 +23,7 @@ public class ObjectUtils {
 	/**
 	 * Check if a value is not null.
 	 * 
+	 * @param <T> Date type.
 	 * @param value The value.
 	 * @param message Exception message.
 	 * @return The value self.
@@ -37,6 +39,7 @@ public class ObjectUtils {
 	/**
 	 * Get a value.
 	 * 
+	 * @param <T> Date type.
 	 * @param value The current value.
 	 * @param defaultValue The value to be return if the current value is null.
 	 * @return Value The current value or default value.

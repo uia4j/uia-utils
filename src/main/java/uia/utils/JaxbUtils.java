@@ -149,7 +149,8 @@ public class JaxbUtils<T> {
          */
         @Override
         public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
-            return JaxbUtils.this.namespaceMap.getOrDefault(namespaceUri, suggestion);
+            String v = JaxbUtils.this.namespaceMap.get(namespaceUri);
+            return v == null ? suggestion : v;
         }
     }
 
